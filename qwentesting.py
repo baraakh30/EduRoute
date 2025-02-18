@@ -20,24 +20,36 @@ FastLanguageModel.for_inference(model)  # Enable native 2x faster inference
 # User profiles
 user_profiles = [
     {
-        "level": "Intermediate",
-        "previous_knowledge": ["Basic Python", "Mathematics"],
-        "interests": ["Web Development", "Frontend Design"]
-    },
-    {
-        "level": "Intermediate",
-        "previous_knowledge": ["Python", "Data Analysis", "SQL"],
-        "interests": ["Data Science", "Machine Learning"]
-    },
-    {
-        "level": "Advanced",
-        "previous_knowledge": ["Deep Learning", "TensorFlow", "PyTorch"],
-        "interests": ["AI Research", "Natural Language Processing"]
-    },
-    {
+        "interests": ["Web Development"],
         "level": "Beginner",
-        "previous_knowledge": ["Graphic Design", "Photoshop"],
-        "interests": ["UI/UX Design", "Product Design"]
+        "learning_goal": "Career shift",
+        "preferred_learning_method": "Videos",
+        "previous_knowledge": ["HTML", "CSS"],
+        "thinking_level": "intermediate"
+    },
+    {
+        "interests": ["Data Science"],
+        "level": "Beginner",
+        "learning_goal": "Career shift",
+        "preferred_learning_method": "Books",
+        "previous_knowledge": ["Python"],
+        "thinking_level": "beginner"
+    },
+    {
+        "interests": ["Digital Marketing"],
+        "level": "Intermediate",
+        "learning_goal": "Enhance skills",
+        "preferred_learning_method": "Online courses",
+        "previous_knowledge": ["SEO", "Content Marketing"],
+        "thinking_level": "intermediate"
+    },
+    {
+        "interests": ["Graphic Design"],
+        "level": "Advanced",
+        "learning_goal": "Master design tools",
+        "preferred_learning_method": "Hands-on projects",
+        "previous_knowledge": ["Adobe Photoshop", "Illustrator"],
+        "thinking_level": "advanced"
     }
 ]
 
@@ -68,9 +80,13 @@ Follow these steps to complete the task:
 
 ### Example Input:
 {{
-    "level": "Beginner",
-    "previous_knowledge": ["HTML", "CSS"],
     "interests": ["Web Development"]
+    "level": "Beginner",
+    "learning_goal" : "Career shift",
+    "preferred_learning_method" : "Videos",
+    "previous_knowledge": ["HTML", "CSS"],
+    "thinking_level": "intermediate"
+    
 }}
 
 ### Example Output:
@@ -105,7 +121,7 @@ You are a career recommendation AI that MUST respond with VALID JSON ONLY.
 DO NOT INCLUDE ANY TEXT OUTSIDE THE JSON FORMAT. Your response will be parsed programmatically.
 
 Follow these steps:
-1. Analyze the user's technical level, existing skills, and interests
+1. Analyze the user's technical level, existing skills, preferred learning method, thinking level and interests
 2. Recommend the most suitable tech career
 3. Create a comprehensive detailed learning path that will help the user achieve his recommended career with 3-8 steps and based on his level
 4. Return the response in this EXACT format:
@@ -116,11 +132,13 @@ Follow these steps:
 
 Example Input:
 {{
-    "level": "Beginner",
-    "previous_knowledge": ["HTML", "CSS"],
     "interests": ["Web Development"]
+    "level": "Beginner",
+    "learning_goal" : "Career shift",
+    "preferred_learning_method" : "Videos",
+    "previous_knowledge": ["HTML", "CSS"],
+    "thinking_level": "intermediate"
 }}
-
 Example Output:
 {{
     "career": "Frontend Developer",
@@ -174,7 +192,7 @@ def generate_repsonse(alpaca_prompt,profile):
         return_tensors="pt"
     ).to("cuda")
 
-    outputs = model.generate(**inputs, max_new_tokens=256, use_cache=True)
+    outputs = model.generate(**inputs, max_new_tokens=256, use_cache=True,temperature = 0.6)
     response = tokenizer.batch_decode(outputs)
     return extract_json_from_text(response[0])
 
