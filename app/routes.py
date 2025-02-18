@@ -1,9 +1,9 @@
 from unsloth import FastLanguageModel
-from flask import  render_template, request, jsonify, send_from_directory
+from flask import  render_template, request, jsonify, send_from_directory,Response
 import json
 import re
 from app import app
-
+from transformers import TextStreamer
 
 
 # Configuration
@@ -120,6 +120,21 @@ Now process this user profile:
 ### Response:
 {}"""
 
+
+
+
+
+
+
+prompt3 = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+
+### Instruction:
+You are an AI chatbot that answers questions and your name is EduRoute
+### Input:
+{}
+### Response:
+{}"""
+
 def extract_json_from_text(text):
     # Use regex to find the JSON-like structure, ignoring code block syntax (backticks)
     match = re.search(r'### Response:\s*(\{.*?\})', text.replace('```json', '').replace('```', ''), re.DOTALL)
@@ -138,10 +153,15 @@ def extract_json_from_text(text):
         return "No response found"
 
 def generate_response(user_profile, prompt_type=1):
-    alpaca_prompt = prompt if prompt_type == 1 else prompt2
+    if prompt_type==1:
+        alpaca_prompt = prompt
+    elif prompt_type == 2:
+        alpaca_prompt = prompt2
+    else : 
+        alpaca_prompt = prompt3
     inputs = tokenizer(
         [
-            alpaca_prompt.format(json.dumps(user_profile,""))
+            alpaca_prompt.format(json.dumps(user_profile),"")
         ],
         return_tensors="pt"
     ).to("cuda")
@@ -151,9 +171,29 @@ def generate_response(user_profile, prompt_type=1):
     return extract_json_from_text(response[0])
 
 
+
+def chat_response(message):
+    inputs = tokenizer(
+        [prompt3.format(json.dumps(message), "")],
+        return_tensors="pt"
+    ).to("cuda")
+
+    text_streamer = TextStreamer(tokenizer, skip_prompt=True)
+
+    def generate_streaming_response():
+        # Generate response with the text streamer
+        for token_ids in model.generate(**inputs, streamer=text_streamer, max_new_tokens=256, use_cache=True):
+            # Decode the token IDs to string
+            token_str = tokenizer.decode(token_ids, skip_special_tokens=True)
+            # Encode the string to bytes and yield it
+            yield token_str.encode('utf-8')
+
+    return Response(generate_streaming_response(), content_type='text/plain;charset=utf-8')
+
+
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 # Flask route to generate response using prompt
 @app.route("/generate_response", methods=["POST"])
@@ -167,3 +207,57 @@ def generate_response_api():
 
     response = generate_response(profile, prompt_type)
     return jsonify(response)
+
+
+from threading import Thread
+import queue
+
+class CustomStreamer(TextStreamer):
+    def __init__(self, tokenizer, queue):
+        super().__init__(tokenizer,skip_prompt=True)
+        self.queue = queue
+    
+    def on_finalized_text(self, text: str, stream_end: bool = False):
+        self.queue.put(text)
+        if stream_end:
+            self.queue.put(None)  # End-of-stream marker
+
+@app.route("/chatbot", methods=["POST"])
+def chatbot():
+    data = request.get_json()
+    message = data.get("prompt", None)
+    if not message:
+        return jsonify({"error": "Profile is required"}), 400
+
+    response_queue = queue.Queue()
+    
+    # Format inputs
+    inputs = tokenizer(
+        [prompt3.format(json.dumps(message), "")],
+        return_tensors="pt"
+    ).to("cuda")
+
+    # Create streamer with queue
+    streamer = CustomStreamer(tokenizer, response_queue)
+
+    # Generation thread
+    def generate():
+        model.generate(
+            **inputs,
+            streamer=streamer,
+            max_new_tokens=256,
+            use_cache=True
+        )
+
+    # Start generation in background thread
+    Thread(target=generate).start()
+
+    # Streaming response generator
+    def stream_generator():
+        while True:
+            chunk = response_queue.get()
+            if chunk is None:
+                break
+            yield chunk.encode('utf-8')
+
+    return Response(stream_generator(), mimetype='text/plain')
