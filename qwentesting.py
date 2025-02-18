@@ -16,8 +16,7 @@ model, tokenizer = FastLanguageModel.from_pretrained(
     load_in_4bit=load_in_4bit,
 )
 FastLanguageModel.for_inference(model)  # Enable native 2x faster inference
-model.push_to_hub("baraakh/qwen2.5-14b-insctruct-learningpath-recommender",token="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")
-tokenizer.push_to_hub("baraakh/qwen2.5-14b-insctruct-learningpath-recommender",token="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")
+
 # User profiles
 user_profiles = [
     {
