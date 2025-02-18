@@ -122,10 +122,6 @@ Now process this user profile:
 
 
 
-
-
-
-
 prompt3 = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
 ### Instruction:
@@ -169,26 +165,6 @@ def generate_response(user_profile, prompt_type=1):
     outputs = model.generate(**inputs, max_new_tokens=256, use_cache=True)
     response = tokenizer.batch_decode(outputs)
     return extract_json_from_text(response[0])
-
-
-
-def chat_response(message):
-    inputs = tokenizer(
-        [prompt3.format(json.dumps(message), "")],
-        return_tensors="pt"
-    ).to("cuda")
-
-    text_streamer = TextStreamer(tokenizer, skip_prompt=True)
-
-    def generate_streaming_response():
-        # Generate response with the text streamer
-        for token_ids in model.generate(**inputs, streamer=text_streamer, max_new_tokens=256, use_cache=True):
-            # Decode the token IDs to string
-            token_str = tokenizer.decode(token_ids, skip_special_tokens=True)
-            # Encode the string to bytes and yield it
-            yield token_str.encode('utf-8')
-
-    return Response(generate_streaming_response(), content_type='text/plain;charset=utf-8')
 
 
 @app.route('/')
