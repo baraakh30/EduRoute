@@ -30,7 +30,7 @@ DO NOT INCLUDE ANY TEXT OUTSIDE THE JSON FORMAT. Your response will be parsed pr
 
 Follow these steps to complete the task:
 
-1. Analyze the user's technical proficiency, existing skills, and interests.
+1. Analyze the user's technical level, existing skills, preferred learning method, thinking level and interests
 2. Recommend the most suitable tech career based on the user's profile and aspirations.
 3. Create a comprehensive, personalized learning path tailored to the user’s current level. The learning path should consist of 3 to 8 steps, starting from the user’s current skill level and progressing to a more advanced level.
 4. Each learning step should be a brief but clear action or resource that directly helps the user progress in their recommended career.
@@ -48,9 +48,13 @@ Follow these steps to complete the task:
 
 ### Example Input:
 {{
-    "level": "Beginner",
-    "previous_knowledge": ["HTML", "CSS"],
     "interests": ["Web Development"]
+    "level": "Beginner",
+    "learning_goal" : "Career shift",
+    "preferred_learning_method" : "Videos",
+    "previous_knowledge": ["HTML", "CSS"],
+    "thinking_level": "intermediate"
+    
 }}
 
 ### Example Output:
@@ -73,7 +77,10 @@ Follow these steps to complete the task:
 ### Input:
 {}
 ### Response:
-{}"""
+{}
+"""
+
+
 
 prompt = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
@@ -82,7 +89,7 @@ You are a career recommendation AI that MUST respond with VALID JSON ONLY.
 DO NOT INCLUDE ANY TEXT OUTSIDE THE JSON FORMAT. Your response will be parsed programmatically.
 
 Follow these steps:
-1. Analyze the user's technical level, existing skills, and interests
+1. Analyze the user's technical level, existing skills, preferred learning method, thinking level and interests
 2. Recommend the most suitable tech career
 3. Create a comprehensive detailed learning path that will help the user achieve his recommended career with 3-8 steps and based on his level
 4. Return the response in this EXACT format:
@@ -93,11 +100,14 @@ Follow these steps:
 
 Example Input:
 {{
-    "level": "Beginner",
-    "previous_knowledge": ["HTML", "CSS"],
     "interests": ["Web Development"]
+    "level": "Beginner",
+    "learning_goal" : "Career shift",
+    "preferred_learning_method" : "Videos",
+    "previous_knowledge": ["HTML", "CSS"],
+    "thinking_level": "intermediate"
+    
 }}
-
 Example Output:
 {{
     "career": "Frontend Developer",
