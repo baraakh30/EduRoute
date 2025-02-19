@@ -172,7 +172,7 @@ def generate_response(user_profile, prompt_type=1):
         return_tensors="pt"
     ).to("cuda")
 
-    outputs = model.generate(**inputs, max_new_tokens=256, use_cache=True)
+    outputs = model.generate(**inputs, max_new_tokens=256, use_cache=True,temperature = 0.6)
     response = tokenizer.batch_decode(outputs)
     return extract_json_from_text(response[0])
 
