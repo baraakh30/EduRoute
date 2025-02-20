@@ -8,7 +8,21 @@
 // 
 
 window.addEventListener('DOMContentLoaded', event => {
+    const teamButtons = document.querySelectorAll('.btn-team');
+    const teamMemberCards = document.querySelectorAll('.team-member-card');
 
+    teamButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const team = button.dataset.team;
+
+            // Hide all cards first
+            teamMemberCards.forEach(card => card.classList.remove('show'));
+
+            // Show cards for the selected team
+            const selectedCards = document.querySelectorAll(`.team-member-card.${team}`);
+            selectedCards.forEach(card => card.classList.add('show'));
+        });
+    });
     // Navbar shrink function
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');

@@ -1,0 +1,483 @@
+/* Variables */
+:root {
+    --primary-color: #013220;
+    --primary-hover: #02592F;
+    --secondary-color: #f5f5dc;
+}
+:root {
+    --primary-color: #013220;      /* Dark Green - Primary/Header Background, Send Button */
+    --secondary-color: #f5f5db;     /* Light Beige - Secondary Background/Message Boxes, Light Text */
+    --accent-color: #959fa9;         /* Greyish Blue - Accent Color, Control Buttons */
+    --background-color: #f6fbf9;     /* Very Light Blue-Grey - Overall Body Background */
+    --text-color: #0a1712;          /* Very Dark Grey - Primary Text Color */
+    --message-box-background: #f5f5db; /* Light Beige - Message boxes */
+    --user-message-background: #013220; /* Dark Green - User messages */
+    --header-text-color: #ffffff;      /* White - Header Text Color */
+    --bot-message-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Shadow for bot messages - NEW */
+    --bot-message-animation-duration: 0.5s; /* Animation duration - NEW */
+}
+
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+h2 {
+    color: var(--primary-color);
+}
+
+
+#form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+input {
+    background: rgba(245, 245, 220, 1);
+    color: #000;
+    outline: none;
+    width: 100%;
+    min-width: 400px;
+    font-size: 0.9rem;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: 1px solid var(--primary-hover);
+}
+
+
+/* Styling the input and the add button to align side by side */
+.d-flex {
+    display: flex;
+    width: 100%;
+}
+
+.custom-interest-input,
+.custom-knowledge-input {
+    flex-grow: 1; /* Ensures the input takes up available space */
+    min-width: 400px; /* Matches the minimum width of the buttons */
+}
+
+.add-interest-btn,
+.add-knowledge-btn {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s all;
+}
+
+.add-interest-btn:hover,
+.add-knowledge-btn:hover {
+    background: var(--primary-hover);
+}
+
+/* Adjust the added interest and knowledge buttons */
+.added-interests button,
+.added-knowledge button {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-hover);
+    padding: 8px;
+    margin: 5px;
+    border-radius: 8px;
+    transition: 0.3s all;
+}
+
+.added-interests button.selected,
+.added-knowledge button.selected {
+    background: var(--primary-hover);
+    color: var(--secondary-color);
+}
+
+.added-interests .delete-btn,
+.added-knowledge .delete-btn {
+    margin-left: 8px; /* Moves the delete button to the right */
+    cursor: pointer;
+}
+
+.question {
+    display: none;
+}
+
+
+.question.active {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#error {
+    color: red;
+    font-size: 0.9rem;
+    display: none;
+    margin-top: 5px;
+}
+
+
+button {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: none;
+    transition: 0.3s all;
+    cursor: pointer;
+}
+
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+
+button:disabled {
+    background: #d3d3d3;
+}
+
+
+.choice-btn {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-hover);
+    transition: 0.3s all;
+}
+
+
+.choice-btn:hover {
+    color: var(--secondary-color);
+}
+
+
+.choice-btn.selected {
+    background: var(--primary-hover);
+    color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+}
+
+
+button#submit {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+
+button#submit:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle, #ffffff, #e3f2fd);
+    overflow: hidden;
+}
+
+
+.particles img.floating-image {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: floatImage 6s infinite ease-in-out;
+    bottom: 10%; 
+    right: 10%; 
+    z-index: 1;
+}
+
+
+@keyframes floatImage {
+    0% { transform: translateY(0px) scale(1); opacity: 0.7; }
+    50% { transform: translateY(-30px) scale(1.5); opacity: 1; }
+    100% { transform: translateY(-60px) scale(2.2); opacity: 1; }
+}
+
+@keyframes floatParticles {
+    0% { transform: translateY(0px) scale(1); opacity: 0.7; }
+    50% { transform: translateY(-30px) scale(1.5); opacity: 1; }
+    100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+}
+
+.particle {
+    position: absolute;
+    background: rgba(0, 123, 255, 0.2);
+    border-radius: 50%;
+    animation: floatParticles 6s infinite ease-in-out;
+}
+
+.particle:nth-child(1) { top: 5%; left: 10%; width: 25px; height: 25px; animation-duration: 8s; }
+.particle:nth-child(2) { top: 15%; left: 40%; width: 30px; height: 30px; animation-duration: 10s; }
+.particle:nth-child(3) { top: 30%; left: 70%; width: 20px; height: 20px; animation-duration: 7s; }
+.particle:nth-child(4) { top: 50%; left: 90%; width: 35px; height: 35px; animation-duration: 9s; }
+.particle:nth-child(5) { top: 70%; left: 20%; width: 40px; height: 40px; animation-duration: 12s; }
+.particle:nth-child(6) { top: 85%; left: 50%; width: 15px; height: 15px; animation-duration: 6s; }
+.particle:nth-child(7) { top: 10%; left: 80%; width: 30px; height: 30px; animation-duration: 11s; }
+.particle:nth-child(8) { top: 60%; left: 30%; width: 25px; height: 25px; animation-duration: 8s; }
+  
+
+/* Hide the image on small screens */
+@media (max-width: 768px) {
+    .floating-image {
+        display: none;
+    }
+}
+/* --- Enhanced Header Styling --- */
+.navbar {
+    background-color: var(--primary-color) !important; /* Dark Green Navbar Background */
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: var(--header-text-color) !important; /* White Navbar Text & Brand */
+}
+
+.navbar-brand {
+    font-weight: bold; /* Make EduRoute bold */
+    font-size: 1.8rem; /* Slightly larger brand font */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem; /* Slightly larger nav links */
+    margin-left: 15px; /* Spacing between nav links */
+    margin-right: 15px;
+}
+
+.navbar-toggler-icon {
+    background-color: var(--header-text-color); /* White Navbar Toggler Icon */
+}
+.navbar-toggler {
+    border-color: var(--header-text-color); /* White Navbar Toggler Border */
+}
+
+.navbar-brand2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #013220;
+    text-decoration: none;
+    letter-spacing: -0.05rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(to right, #d3b58d , #d3b58d ); /* Gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease, color 0.3s ease; 
+  }
+  
+  .navbar-brand2:hover {
+    -webkit-text-fill-color: #013220;
+    background: none;
+    color: #013220;
+    transform: scale(1.05);
+  }
+  
+  .navbar {
+    padding: 1.5rem 2rem; /* Increased padding */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Softer shadow */
+  }
+  
+  .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem; /* Adjusted size */
+    font-weight: 700;
+    /* color: #013220;
+    text-decoration: none;
+    transition: transform 0.3s ease; /* Smooth transform */
+  }
+  
+  .navbar-brand2:hover {
+    transform: scale(1.05); /* Subtle scale on hover */
+  }
+  .navbar {
+    padding: 1rem 1.5rem;
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.08);
+  }
+  
+  .navbar-brand2 img {
+    width: 150px;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #0a1712;
+    padding: 0.7rem 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    color: #013220;
+  }
+
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    color: var(--primary);
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+  }
+  .nav-fill > .nav-link,
+.nav-fill .nav-item {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.nav-justified > .nav-link,
+.nav-justified .nav-item {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.nav-fill .nav-item .nav-link,
+.nav-justified .nav-item .nav-link {
+  width: 100%;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    color: #6c757d;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.75rem 0;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
+    color: #007a6c ;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link.active {
+    color: #007a6c  ;
+  }
+  
+@media (min-width: 992px) {
+    #mainNav {
+      box-shadow: none;
+      background-color: transparent;
+    }
+    #mainNav .navbar-brand {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    #mainNav .navbar-brand:hover {
+      color: #fff;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0 1rem;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link:hover {
+      color: #fff;
+    }
+    #mainNav .navbar-nav .nav-item:last-child .nav-link {
+      padding-right: 0;
+    }
+    #mainNav.navbar-shrink {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+    }
+    #mainNav.navbar-shrink .navbar-brand { 
+      color: #212529;
+    }
+    #mainNav.navbar-shrink .navbar-brand:hover {
+      color: #f4623a;
+    }
+    #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
+      color: #212529;
+    }
+    #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link:hover {
+      color: #f4623a;
+    }
+  }
+  
+
+
+  .navbar-brand2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #d3b58d ;
+    text-decoration: none;
+    letter-spacing: -0.05rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(to right, #d3b58d , #005f56); /* Gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease, color 0.3s ease; 
+  }
+  
+  .navbar-brand2:hover {
+    -webkit-text-fill-color: #013220;
+    background: none;
+    color: #013220;
+    transform: scale(1.05);
+  }
+  
+  .navbar {
+    padding: 1.5rem 2rem; /* Increased padding */
+    box-shadow: 0 0.25rem 0.5rem white; /* Softer shadow */
+  }
+  
+  .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.rem; /* Adjusted size */
+    font-weight: 700;
+    /* color: #013220;
+    text-decoration: none;
+    transition: transform 0.3s ease; /* Smooth transform */
+  }
+  
+  .navbar-brand2:hover {
+    transform: scale(1.05); /* Subtle scale on hover */
+  }
+  
+  .navbar-nav .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; /* Medium weight */
+    color: white;
+    padding: 0.8rem 1.2rem; /* Increased padding */
+    margin: 0 0.5rem; /* Added margin */
+    transition: color 0.3s ease, border-bottom 0.3s ease; /* Transition for underline */
+    border-bottom: 2px solid transparent; /* Transparent border for animation */
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: white;
+    border-bottom: 2px solid #013220; /* Underline on hover */
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: white;
+    font-weight: 600; /* Slightly bolder active link */
+    border-bottom: 2px solid white; /* Underline for active link */
+  }
+  

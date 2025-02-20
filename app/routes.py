@@ -4,8 +4,9 @@ import json
 import re
 from app import app
 from transformers import TextStreamer
-
-
+import mimetypes
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/css', '.css')
 # Configuration
 MODEL_DIR = "./career-qwen"
 max_seq_length = 2048  # Choose any! We auto support RoPE Scaling internally!
@@ -53,7 +54,6 @@ Follow these steps to complete the task:
     "learning_goal" : "Career shift",
     "preferred_learning_method" : "Videos",
     "previous_knowledge": ["HTML", "CSS"],
-    "thinking_level": "intermediate"
     
 }}
 
@@ -105,7 +105,6 @@ Example Input:
     "learning_goal" : "Career shift",
     "preferred_learning_method" : "Videos",
     "previous_knowledge": ["HTML", "CSS"],
-    "thinking_level": "intermediate"
     
 }}
 Example Output:
@@ -163,8 +162,7 @@ def generate_response(user_profile, prompt_type=1):
         alpaca_prompt = prompt
     elif prompt_type == 2:
         alpaca_prompt = prompt2
-    else : 
-        alpaca_prompt = prompt3
+
     inputs = tokenizer(
         [
             alpaca_prompt.format(json.dumps(user_profile),"")
@@ -185,14 +183,20 @@ def home():
 def chathome():
     return render_template('chat.html')
 
+@app.route('/results')
+def results():
+    return render_template('results.html')
 
+@app.route('/form')
+def form():
+    return render_template('form.html')
 
 # Flask route to generate response using prompt
 @app.route("/generate_response", methods=["POST"])
 def generate_response_api():
     data = request.get_json()
     profile = data.get("profile", None)
-    prompt_type = data.get("prompt_type", 1)
+    prompt_type = int(data.get("prompt_type", 1))
 
     if not profile:
         return jsonify({"error": "Profile is required"}), 400
