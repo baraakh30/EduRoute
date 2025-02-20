@@ -135,7 +135,7 @@ Now process this user profile:
 prompt3 = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
 ### Instruction:
-You are an AI chatbot that answers questions and your name is EduRoute
+You are an AI chatbot that answers questions and your name is RouteGuide
 ### Input:
 {}
 ### Response:
@@ -180,6 +180,12 @@ def generate_response(user_profile, prompt_type=1):
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/chathome')
+def chathome():
+    return render_template('chat.html')
+
+
 
 # Flask route to generate response using prompt
 @app.route("/generate_response", methods=["POST"])
