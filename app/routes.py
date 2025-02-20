@@ -13,6 +13,16 @@ max_seq_length = 2048  # Choose any! We auto support RoPE Scaling internally!
 dtype = None  # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
 load_in_4bit = True  # Use 4bit quantization to reduce memory usage. Can be False.
 
+# make sure to uncomment these if this is your first time using the code
+
+# model, tokenizer = FastLanguageModel.from_pretrained(
+#     model_name = "unsloth/Qwen2.5-14B-Instruct-1M-bnb-4bit",
+#     max_seq_length = max_seq_length,
+#     dtype = dtype,
+#     load_in_4bit = load_in_4bit,
+# )
+
+
 # Load the model and tokenizer
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name=MODEL_DIR,  # YOUR MODEL YOU USED FOR TRAINING
