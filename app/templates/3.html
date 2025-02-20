@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recommendation Results with Loading</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: #013220;
+      color: white;
+      transition: background 1s ease-in-out;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .loading-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 9999;
+    }
+    .progress-bar {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+    }
+    .circle {
+      transform: rotate(-90deg);
+    }
+    .circle-background,
+    .circle-progress {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+    }
+    .circle-background {
+      stroke: #eee;
+    }
+    .circle-progress {
+      stroke: #4ecdc4;
+      stroke-dasharray: 339.292;
+      stroke-dashoffset: 339.292;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: #4ecdc4;
+    }
+    .loading-message {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #fff;
+    }
+    .hidden {
+      display: none;
+    }
+    .lamp-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 20vh;
+      position: fixed;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: none;
+    }
+    .rope {
+      width: 2px;
+      height: 60px;
+      background-color: white;
+      margin-bottom: -5px;
+    }
+    .lamp {
+      display: inline-block;
+      width: 60px;
+      height: 80px;
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+      animation: swing 1.5s infinite ease-in-out alternate;
+    }
+    .lamp:hover {
+      transform: scale(1.1);
+    }
+    @keyframes swing {
+      0% {
+        transform: rotate(-5deg);
+      }
+      100% {
+        transform: rotate(5deg);
+      }
+    }
+    .bulb {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0px 0px 20px white;
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+    .lamp.on .bulb {
+      background: #013220;
+      box-shadow: 0px 0px 40px #013220;
+      animation: flicker 0.2s infinite alternate;
+    }
+    @keyframes flicker {
+      0% {
+        box-shadow: 0px 0px 30px #013220;
+      }
+      100% {
+        box-shadow: 0px 0px 50px #013220;
+      }
+    }
+    .click-text {
+      color: black;
+      font-size: 18px;
+      text-shadow: 0 0 10px black;
+      margin-top: 0px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .container {
+      display: none;
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f5f5dc;
+      box-shadow: 0 0 30px #f6f4f8;
+      padding: 20px;
+      border-radius: 10px;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 80px;
+      color: #f5f5dc;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .container.visible {
+      opacity: 1;
+      display: flex;
+    }
+    .card {
+      background: #013220;
+      width: 300px;
+      height: 400px;
+      perspective: 1000px;
+      transition: transform 0.5s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.1);
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #f5f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background:013220;
+    }
+    .card-back {
+      transform: rotateY(180deg);
+    }
+   #lampImage{
+display: none;
+width: 500px;
+height: auto;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+
+
+   }
+  </style>
+</head>
+<body>
+  <div class="loading-container" id="loadingContainer">
+    <div class="progress-bar">
+      <svg class="circle" width="120" height="120">
+        <circle class="circle-background" cx="60" cy="60" r="54"></circle>
+        <circle class="circle-progress" cx="60" cy="60" r="54"></circle>
+      </svg>
+      <div class="progress-text" id="progressText">0%</div>
+    </div>
+    <p class="loading-message">Loading...</p>
+  </div>
+  <div class="lamp-container" id="lampContainer">
+    <div class="rope"></div>
+    <div class="lamp">
+      <div class="bulb"></div>
+    </div>
+    <p class="click-text">Click!</p>
+  </div>
+  <div class="container" id="cardsContainer">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">Recommended Job</div>
+        <div class="card-back">Software Engineer</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">Learning Path</div>
+        <div class="card-back">Master Data Structures & Algorithms</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const lamp = document.querySelector(".lamp");
+      const container = document.querySelector(".container");
+      const bulbContainer = document.getElementById("lampContainer");
+      const loadingContainer = document.getElementById("loadingContainer");
+      const circleProgress = document.querySelector(".circle-progress");
+      const progressText = document.getElementById("progressText");
+      const sleepingRobot = document.getElementById("sleepingRobot");
+      const lampImage = document.getElementById("lampImage");
+  
+      let maxOffset = 339.292;
+      let progress = 0;
+      let loadingInterval = setInterval(() => {
+        progress++;
+        let offset = maxOffset - maxOffset * (progress / 100);
+        circleProgress.style.strokeDashoffset = offset;
+        progressText.textContent = progress + "%";
+        
+        if (progress >= 100) {
+          clearInterval(loadingInterval);
+          loadingContainer.classList.add("hidden");
+          bulbContainer.style.display = "flex";
+          sleepingRobot.style.display = "none"; 
+          lampImage.style.display="block";
+        }
+      }, 30);
+  
+      lamp.addEventListener("click", function () {
+        if (lamp.classList.contains("on")) {
+          lamp.classList.remove("on");
+          container.classList.remove("visible");
+          document.body.style.background = "#013220";
+        } else {
+          lamp.classList.add("on");
+          container.classList.add("visible");
+          document.body.style.background = "#f5f5dc";
+        }
+        if(lampImage.style.display==="none" || lampImage.style.display ===""){
+          lampImage.style.display="block";
+        }else{
+          lampImage.style.display="none";
+        }
+      });
+    });
+  </script>
+  
+  <img id="lampImage" src="{{ url_for('static', filename='images/Ai.jpg') }}" alt="Lamp Image" style="display: none;width: 500px;height: auto;margin: 20px auto;border-radius: 15px; ">
+
+   <footer style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); text-align: center;">
+    <img id="sleepingRobot" src="https://cdn-icons-png.flaticon.com/512/4712/4712025.png" 
+        alt="Sleeping Robot" width="75  ">
+    
+        
+</footer>
+
+</body>
+</html>

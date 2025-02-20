@@ -1,0 +1,740 @@
+/* style_chat.css */
+
+/* Import Inter Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+/* Root Colors - New Color Palette */
+:root {
+    --primary-color: #013220;      /* Dark Green - Primary/Header Background, Send Button */
+    --secondary-color: #f5f5db;     /* Light Beige - Secondary Background/Message Boxes, Light Text */
+    --accent-color: #959fa9;         /* Greyish Blue - Accent Color, Control Buttons */
+    --background-color: #f6fbf9;     /* Very Light Blue-Grey - Overall Body Background */
+    --text-color: #0a1712;          /* Very Dark Grey - Primary Text Color */
+    --message-box-background: #f5f5db; /* Light Beige - Message boxes */
+    --user-message-background: #013220; /* Dark Green - User messages */
+    --header-text-color: #ffffff;      /* White - Header Text Color */
+    --bot-message-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Shadow for bot messages - NEW */
+    --bot-message-animation-duration: 0.5s; /* Animation duration - NEW */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body.bg-animation {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--background-color); /* Very Light Blue-Grey Body Background */
+}
+
+body.bg-animation::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(45deg, var(--primary-color) 30%, var(--background-color) 70%); /* Dark Green & Very Light Blue-Grey Gradient */
+    background-size: 400% 400%;
+    z-index: -1;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* --- Enhanced Header Styling --- */
+.navbar {
+    background-color: var(--primary-color) !important; /* Dark Green Navbar Background */
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: var(--header-text-color) !important; /* White Navbar Text & Brand */
+}
+
+.navbar-brand {
+    font-weight: bold; /* Make EduRoute bold */
+    font-size: 1.8rem; /* Slightly larger brand font */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem; /* Slightly larger nav links */
+    margin-left: 15px; /* Spacing between nav links */
+    margin-right: 15px;
+}
+
+.navbar-toggler-icon {
+    background-color: var(--header-text-color); /* White Navbar Toggler Icon */
+}
+.navbar-toggler {
+    border-color: var(--header-text-color); /* White Navbar Toggler Border */
+}
+
+.navbar-brand2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #013220;
+    text-decoration: none;
+    letter-spacing: -0.05rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(to right, #d3b58d , #d3b58d ); /* Gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease, color 0.3s ease; 
+  }
+  
+  .navbar-brand2:hover {
+    -webkit-text-fill-color: #013220;
+    background: none;
+    color: #013220;
+    transform: scale(1.05);
+  }
+  
+  .navbar {
+    padding: 1.5rem 2rem; /* Increased padding */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Softer shadow */
+  }
+  
+  .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem; /* Adjusted size */
+    font-weight: 700;
+    /* color: #013220;
+    text-decoration: none;
+    transition: transform 0.3s ease; /* Smooth transform */
+  }
+  
+  .navbar-brand2:hover {
+    transform: scale(1.05); /* Subtle scale on hover */
+  }
+
+.chat-container {
+    height: 40vh;      /* Example: Reduced viewport height percentage */
+    max-height: 550px;
+    margin-top: 50px;
+    width: 90%;
+    max-width: 700px;
+    background: #fff; /* Keep white container background for contrast */
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    /* max-height: 750px; */
+    margin-top: 20px; /* Reduced margin to bring chat closer to header */
+}
+
+
+/* Chat Header - Dark Green Header */
+.chat-header {
+    background: var(--primary-color); /* Dark Green Header */
+    color: var(--secondary-color); /* Light Beige Header Text */
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content horizontally */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-header .header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-info .chatbot-logo-icon {
+    font-size: 2rem;
+    color: var(--secondary-color); /* Light Beige Icon */
+}
+
+
+.header-info .logo-text {
+   
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02rem;
+    line-height: 1.3;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+/* Chat Body - Light Beige Background */
+.chat-body {
+ 
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 20px;
+    flex-grow: 1;
+    background-color: var(--secondary-color); /* Light Beige Chat Body */
+    color: var(--text-color); /* Apply text color to chat body */
+}
+
+.chat-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.chat-body .message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.chat-body .message .bot-avatar-icon,
+.chat-body .message .user-avatar { /* User avatar can remain image-based if you prefer */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--message-box-background); /* Light Beige Avatar Background */
+    border: 1px solid var(--secondary-color); /* Light Beige Border */
+    display: flex; /* Center the icon inside avatar circle */
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem; /* Icon size inside avatar */
+    color: var(--primary-color); /* Dark Green Icon */
+
+}
+.chat-body .message .user-avatar {
+    /* If you keep user avatar as image, remove or adjust icon-specific styles */
+    display: block; /* Revert to default display for image if used */
+    font-size: inherit; /* Reset icon size */
+    color: inherit;      /* Reset icon color */
+    justify-content: flex-start; /* Reset content alignment */
+    align-items: flex-start;
+    background-color: var(--message-box-background); /* Light Beige User Avatar Background */
+}
+
+
+.chat-body .message .bot-avatar-icon {
+    background-color: var(--primary-color); /* Dark Green Background for icon avatar */
+    color: var(--secondary-color); /* Light Beige Icon color */
+    padding: 5px; /* Add padding if needed to adjust icon appearance in circle */
+    box-sizing: border-box; /* Ensure padding is inside the defined width/height */
+}
+
+
+.chat-body .message .message-text {
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    max-width: 85%;
+    word-wrap: break-word;
+}
+
+.chat-body .bot-message .message-text {
+    background-color: var(--message-box-background); /* Light Beige Bot Message Box */
+    border-radius: 12px 12px 12px 4px;
+    color: var(--text-color); /* Very Dark Grey Bot Message Text */
+    box-shadow: var(--bot-message-shadow); /* Apply shadow to bot messages - NEW */
+    animation: botMessageEntry var(--bot-message-animation-duration) ease-out; /* Apply entry animation - NEW */
+}
+
+.chat-body .user-message {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.chat-body .user-message .message-text {
+    background-color: var(--user-message-background); /* Dark Green User Message Box */
+    color: var(--secondary-color); /* Light Beige User Message Text */
+    border-radius: 12px 12px 4px 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Chat Footer - Light Beige Footer Background */
+.chat-footer {
+    background: var(--secondary-color); /* Light Beige Footer */
+    padding: 20px 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.chat-footer .chat-form {
+    display: flex;
+    align-items: center;
+    background: #fff; /* Keep white input form background for contrast */
+    border-radius: 30px;
+    padding: 8px 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.chat-footer .chat-form .message-input {
+    flex-grow: 1;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.95rem;
+    padding-right: 10px;
+    color: var(--text-color); /* Very Dark Grey Input Text */
+    resize: none;
+    max-height: 120px;
+    overflow-y: auto;
+    line-height: 2.2;
+    vertical-align: top;
+}
+
+
+.chat-footer .chat-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-footer .chat-controls .control-button {
+    background: transparent;
+    border: none;
+    color: var(--accent-color); /* Greyish Blue - Accent Color, Control Buttons */
+    font-size: 1.3rem;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.chat-footer .chat-controls .control-button:hover {
+    background-color: rgba(0, 0, 0, 0.06); /* Keep subtle hover effect */
+}
+
+.chat-footer .chat-controls .send-button {
+    background-color: var(--primary-color); /* Dark Green Send Button */
+    color: var(--secondary-color); /* Light Beige Send Button Text/Icon */
+}
+
+.chat-footer .chat-controls .send-button:hover {
+    background-color: #003377; /* Darker Green Send Button Hover (adjust if needed for purple accent) */
+}
+
+
+.chat-footer .file-upload-wrapper {
+    position: relative;
+    width: 38px;
+    height: 38px;
+}
+
+.chat-footer .file-upload-wrapper input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.chat-footer .file-upload-wrapper #file-cancel {
+    display: none; /* Hidden by default - Fix for unwanted "X" button */
+    color: var(--accent-color); /* Greyish Blue - Cancel Icon */
+    background: #fff; /* White Cancel Button Background */
+}
+
+.chat-footer .file-upload-wrapper.file-uploaded #file-cancel {
+    display: flex; /* Only show when file is uploaded */
+}
+.chat-footer .file-upload-wrapper :where(#file-cancel),
+.chat-footer .file-upload-wrapper.file-uploaded #file-upload {
+    display: none; /* Hide upload button when file is being previewed */
+}
+
+
+/* Emoji Picker Styling - Keep as is, mostly white/neutral */
+em-emoji-picker {
+    position: absolute;
+    bottom: 100%;
+    right: 25px;
+    transform: translateY(8px);
+    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s ease-in-out;
+}
+
+body.show-emoji-picker .chat-container em-emoji-picker {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* Responsive Design - Adjusted for balance on smaller screens */
+@media (max-width: 600px) {
+    body.bg-animation {
+        align-items: flex-start;
+    }
+    .chat-container {
+        border-radius: 0;
+        height: 100vh;
+        max-height: none;
+        box-shadow: none;
+        width: 100%;
+        margin-top: 55px; /* Adjusted for mobile header */
+    }
+    .chat-header {
+        padding: 15px 20px;
+        justify-content: center; /* Center content on mobile too */
+    }
+    .chat-body {
+        padding: 20px 15px;
+        gap: 16px;
+    }
+    .chat-footer {
+        padding: 15px 20px;
+    }
+    .chat-footer .chat-form {
+        padding: 6px 12px;
+    }
+    .chat-footer .chat-form .message-input {
+        font-size: 0.9rem;
+        height: 35px;
+        line-height: 1.8;
+    }
+    .chat-footer .chat-controls .control-button {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+        color: var(--accent-color); /* Greyish Blue - Control Buttons on Mobile */
+    }
+    .header-info .logo-text {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+    .header-info .chatbot-logo-icon {
+        font-size: 2rem;
+        color: var(--secondary-color); /* Light Beige Icon on Mobile */
+    }
+    .chatbot-logo-icon {
+        font-size: 2.5rem;
+        color: var(--secondary-color); /* Default Light Beige Icon Color */
+    }
+    .chat-body .message-text {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+    .bot-avatar-icon, .user-avatar {
+        font-size: 1.3rem;
+        width: 30px;
+        height: 30px;
+        color: var(--primary-color); /* Dark Green Avatar Icons on Mobile */
+    }
+    em-emoji-picker {
+        right: 20px;
+        max-width: 90%;
+        transform: translateX(0) translateY(10px);
+        left: auto;
+    }
+}
+
+/* --- Bot Message Enhancements --- */
+:root {
+    --bot-message-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Shadow for bot messages */
+    --bot-message-animation-duration: 0.5s; /* Animation duration */
+}
+
+.chat-body .bot-message .message-text {
+    box-shadow: var(--bot-message-shadow); /* Apply shadow */
+    animation: botMessageEntry var(--bot-message-animation-duration) ease-out; /* Apply entry animation */
+    /* Increased padding and slightly larger font-size for readability if needed */
+    padding: 14px 18px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+@keyframes botMessageEntry {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    margin: 0;
+    overflow: hidden; /* Prevent scrollbars */
+    background: #f0f0f0; /* Light gray background (adjust as needed) */
+}
+
+.navbar {
+    padding: 1rem 1.5rem;
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.08);
+  }
+  
+  .navbar-brand2 img {
+    width: 150px;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #0a1712;
+    padding: 0.7rem 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    color: #013220;
+  }
+
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    color: var(--primary);
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+  }
+  .nav-fill > .nav-link,
+.nav-fill .nav-item {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.nav-justified > .nav-link,
+.nav-justified .nav-item {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.nav-fill .nav-item .nav-link,
+.nav-justified .nav-item .nav-link {
+  width: 100%;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    color: #6c757d;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.75rem 0;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
+    color: #007a6c ;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link.active {
+    color: #007a6c  ;
+  }
+  
+@media (min-width: 992px) {
+    #mainNav {
+      box-shadow: none;
+      background-color: transparent;
+    }
+    #mainNav .navbar-brand {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    #mainNav .navbar-brand:hover {
+      color: #fff;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0 1rem;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link:hover {
+      color: #fff;
+    }
+    #mainNav .navbar-nav .nav-item:last-child .nav-link {
+      padding-right: 0;
+    }
+    #mainNav.navbar-shrink {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+    }
+    #mainNav.navbar-shrink .navbar-brand { 
+      color: #212529;
+    }
+    #mainNav.navbar-shrink .navbar-brand:hover {
+      color: #f4623a;
+    }
+    #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
+      color: #212529;
+    }
+    #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link:hover {
+      color: #f4623a;
+    }
+  }
+  
+
+
+  .navbar-brand2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #d3b58d ;
+    text-decoration: none;
+    letter-spacing: -0.05rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(to right, #d3b58d , #005f56); /* Gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease, color 0.3s ease; 
+  }
+  
+  .navbar-brand2:hover {
+    -webkit-text-fill-color: #013220;
+    background: none;
+    color: #013220;
+    transform: scale(1.05);
+  }
+  
+  .navbar {
+    padding: 1.5rem 2rem; /* Increased padding */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Softer shadow */
+  }
+  
+  .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.rem; /* Adjusted size */
+    font-weight: 700;
+    /* color: #013220;
+    text-decoration: none;
+    transition: transform 0.3s ease; /* Smooth transform */
+  }
+  
+  .navbar-brand2:hover {
+    transform: scale(1.05); /* Subtle scale on hover */
+  }
+  
+  .navbar-nav .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; /* Medium weight */
+    color: #0a1712;
+    padding: 0.8rem 1.2rem; /* Increased padding */
+    margin: 0 0.5rem; /* Added margin */
+    transition: color 0.3s ease, border-bottom 0.3s ease; /* Transition for underline */
+    border-bottom: 2px solid transparent; /* Transparent border for animation */
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #013220;
+    border-bottom: 2px solid #013220; /* Underline on hover */
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: #013220;
+    font-weight: 600; /* Slightly bolder active link */
+    border-bottom: 2px solid #013220; /* Underline for active link */
+  }
+  
+    
+.bubble-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place bubbles behind other content */
+}
+
+.bubble {
+    position: absolute;
+    background-color: #e6f2ff; /* Light blue bubble color (adjust as needed) */
+    border-radius: 50%;
+    opacity: 0.6; /* Adjust opacity as needed */
+    animation: float 6s linear infinite, drift 4s linear infinite; /* Combine animations */
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; } /* Start at bottom, fade in */
+    25% { opacity: 1; } /* Fully visible */
+    100% { transform: translateY(-20vh); opacity: 0; } /* Float to top, fade out */
+}
+
+@keyframes drift {
+    0% { margin-left: 0; }
+    50% { margin-left: 20%; } /* Move horizontally */
+    100% { margin-left: 0; }
+}
+ .bot-message.thinking  {
+  padding: 2px 16px;
+}
+
+.thinking-indicator {
+  display: flex;
+  gap: 4px;
+  padding-block: 15px;
+}
+
+.thinking-indicator .dot {
+  height: 7px;
+  width: 7px;
+  opacity: 0.7;
+  border-radius: 50%;
+  background: #00abb1;
+  animation: dotPulse 1.8s ease-in-out infinite;
+}
+
+.thinking-indicator .dot:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.thinking-indicator .dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.thinking-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.chat-emoji-picker {
+  position: absolute;
+  bottom: 60px; /* Adjust based on input field height */
+  right: 200px; /* Move it a bit to the left (adjust this value) */
+  z-index: 9999;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: none; /* Hide initially */
+  visibility: hidden; /* Prevent weird flashes */
+  opacity: 0; /* Start fully transparent */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* When the emoji picker is toggled on */
+.chat-emoji-picker.active {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}

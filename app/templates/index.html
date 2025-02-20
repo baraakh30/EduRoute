@@ -1,64 +1,505 @@
 <!DOCTYPE html>
-<!-- Coding By JV Codes - youtube.com/@jvcodes -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>EduRoute</title>
-    <!-- Linking Google fonts for icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <link href="../static/css/styles.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
 </head>
-<body>
-  <!-- Chatbot Toggler -->
-  <button id="chatbot-toggler">
-    <span class="material-symbols-rounded">mode_comment</span>
-    <span class="material-symbols-rounded">close</span>
-  </button>
 
-  <div class="chatbot-popup">
-    <!-- Chatbot Header -->
-    <div class="chat-header">
-      <div class="header-info">
-        <img class="chatbot-logo" src="{{ url_for('static', filename='images/robotic.png') }}" alt="Chatbot Logo" width="50" height="50">
-        </img>
-        <h2 class="logo-text">Chatbot</h2>
-      </div>
-      <button id="close-chatbot" class="material-symbols-rounded">keyboard_arrow_down</button>
-    </div>
-
-    <!-- Chatbot Body -->
-    <div class="chat-body">
-      <div class="message bot-message">
-        <img class="bot-avatar" src="{{ url_for('static', filename='images/robotic.png') }}" alt="Chatbot Logo" width="50" height="50">
-        </img>
-        <!-- prettier-ignore -->
-        <div class="message-text"> Hey there  <br />I am EduRoute, How can I help you today? </div>
-      </div>
-    </div>
-
-    <!-- Chatbot Footer -->
-    <div class="chat-footer">
-      <form action="#" class="chat-form">
-        <textarea placeholder="Message..." class="message-input" required></textarea>
-        <div class="chat-controls">
-          <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
-          <div class="file-upload-wrapper">
-            <input type="file" accept="image/*" id="file-input" hidden />
-            <img src="{{ url_for('static', filename='images/robotic.png') }}" />
-            <button type="button" id="file-upload" class="material-symbols-rounded">attach_file</button>
-            <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
-          </div>
-          <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand2" href="#page-top">EduRoute</a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#page-top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#connect">Contact</a></li>
+                </ul>
+            </div>
         </div>
-      </form>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead hero-section">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-end">
+                    <h1 class="text-white font-weight-bold hero-title">EduRoute</h1>
+                    <!-- <hr class="divider" /> -->
+                </div>
+                <div class="col-lg-8 align-self-baseline hero-subtitle">
+                    <h2 class="mb-5">Your ultimate
+                        guide to personalized learning and career growth.</h2>
+                    <a class="btn btn-primary btn-xl hero-button" href="#about">Find Out More</a><br><br><a class="btn btn-primary btn-xl hero-button" href="/chathome">chat with RouteGuide</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- About-->
+    <section class="page-section bg-primary" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0" id="h2"> EduRoute: Learn. Grow. Succeed.</h2>
+                    <hr class="divider divider-light" />
+                    <h4 class="text-white-75 mb-4">Personalized learning and career development resources to help you reach your full potential</h4>
+                    <a class="btn btn-light btn-xl" href="#services">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services-->
+
+    <section class="what-we-do-section py-5" id="services">
+        <div class="container">
+            <h2 class="text-center mb-4 animate__animated animate__fadeIn ">How EduRoute Guides You</h2>
+            <div class="underline mx-auto mb-5 animate__animated animate__fadeIn animate__delay-0.2s"></div>
+            <div
+                class="service-columns d-flex justify-content-center animate__animated animate__fadeIn animate__delay-0.4s">
+                <div class="service-column card shadow p-4 mb-4">
+                    <img src="../static/assets/img/about/about1.png" alt="Personalized Learning Paths" class="mb-3">
+                    <h3>Personalized Learning Paths</h3>
+                    <p>EduRoute is designed to provide students and professionals with a personalized learning path to
+                        guide them through the educational journey. We offer tailored resources, career advice, and
+                        tools to help you reach your learning and career goals efficiently.</p>
+                </div>
+                <div class="service-column card shadow p-4 mb-4">
+                    <img src="../static/assets/img/about/about2.png" alt="Career Advice & Guidance" class="mb-3">
+                    <h3>Career Advice & Guidance</h3>
+                    <p>EduRoute is designed to provide students and professionals with a personalized learning path to
+                        guide them through the educational journey. We offer tailored resources, career advice, and
+                        tools to help you reach your learning and career goals efficiently.</p>
+                </div>
+            
+            </div>
+            <div class="all-services-button-container animate__animated animate__fadeInUp animate__delay-0.6s">
+                <a href="#secondpage" class="learn-more-button btn">Start your journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="page-section" id="services">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-center mt-0">At Your Service</h2>
+            <hr class="divider" />
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">Sturdy Themes</h3>
+                        <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">Up to Date</h3>
+                        <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">Ready to Publish</h3>
+                        <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">Made with Love</h3>
+                        <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- Portfolio-->
+    <!-- <div id="portfolio">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-4 col-sm-6">
+                    <a class="portfolio-box" href="assets/img/portfolio/fullsize/back.jpg" title="Project Name">
+                        <img class="img-fluid  image-grid" src="../static/assets/img/portfolio/thumbnails/back.jpg" alt="..." />
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">Category</div>
+                            <div class="project-name">Project Name</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a class="portfolio-box" href="assets/img/portfolio/fullsize/mobile.jpg" title="Project Name" width="600" height="220">
+                        <img class="img-fluid " src="../static/assets/img/portfolio/thumbnails/mobile.jpg" alt="..."width="600" height="220" />
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">Category</div>
+                            <div class="project-name">Project Name</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a class="portfolio-box" href="assets/img/portfolio/fullsize/UIUX.jpg" title="Project Name">
+                        <img class="img-fluid "  src="../static/assets/img/portfolio/thumbnails/UIUX.jpg" alt="..." width="600" height="220" />
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">Category</div>
+                            <div class="project-name">Project Name</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a class="portfolio-box" href="assets/img/portfolio/fullsize/ai.jpg" title="Project Name">
+                        <img class="img-fluid " src="../static/assets/img/portfolio/thumbnails/ai.jpg" alt="..." width="600" height="220"/>
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">Category</div>
+                            <div class="project-name">Project Name</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a class="portfolio-box" href="assets/img/portfolio/fullsize/cyper.jpg" title="Project Name">
+                        <img class="img-fluid " src="../static/assets/img/portfolio/thumbnails/cyper.jpg" alt="..." width="600" height="220" />
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">Category</div>
+                            <div class="project-name">Project Name</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a class="portfolio-box" href="assets/img/portfolio/fullsize/Data.jpg" title="Project Name">
+                        <img class="img-fluid " src="../static/assets/img/portfolio/thumbnails/Data.jpg" alt="..."  width="600" height="220"/>
+                        <div class="portfolio-box-caption p-3">
+                            <div class="project-category text-white-50">Category</div>
+                            <div class="project-name">Project Name</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Call to action-->
+    <section class="page-section bg-dark text-white">
+        <div class="container px-4 px-lg-5 text-center">
+            <section class="teams-section py-5 " id="teams">
+                <div class="container">
+                    <h2 class="text-center mb-4 animate__animated animate__fadeIn text-white">Our Expert Teams</h2>
+                    <div class="underline2 mx-auto mb-5 animate__animated animate__fadeIn animate__delay-0.2s "></div>
+                    <div class="row justify-content-center animate__animated animate__fadeIn animate__delay-0.4s">
+                        <div class="col-lg-4 col-md-6 mb-4">
+                           <a href="#about" class="card-container card-link "><div
+                                class="team-block p-4 bg-white rounded shadow-sm animate__animated animate__fadeInUp animate__delay-0.6s">
+                                <h3 class="team-name mb-3 text-accent font-weight-bold">Data Science</h3>
+                                <p class="team-description text-muted">Our Data Science team excels in extracting valuable
+                                    insights from complex data sets. We leverage statistical analysis, machine learning, and
+                                    data visualization techniques to drive data-informed decisions and create innovative
+                                    solutions.</p>
+                            </div></a>
+                        </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mb-4">
+                          <a>  
+                            <a href="#about" class="card-container card-link "> <div
+                                class="team-block p-4 bg-white rounded shadow-sm animate__animated animate__fadeInUp animate__delay-0.7s">
+                                <h3 class="team-name mb-3 text-accent font-weight-bold">Artificial Intelligence (AI)</h3>
+                                <p class="team-description text-muted">The AI team is dedicated to developing intelligent
+                                    systems and applications. We specialize in areas like natural language processing, computer
+                                    vision, and neural networks to build cutting-edge AI solutions that enhance user experiences
+                                    and automate complex processes.</p>
+                            </div></a>
+                           </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <a href="#about" class="card-container card-link "><div
+                                class="team-block p-4 bg-white rounded shadow-sm animate__animated animate__fadeInUp animate__delay-0.8s">
+                                <h3 class="team-name mb-3 text-accent font-weight-bold">Web Development (Front End)</h3>
+                                <p class="team-description text-muted">Our Front End Web Development team focuses on crafting
+                                    engaging and user-friendly web interfaces. We are experts in HTML, CSS, and JavaScript, and
+                                    modern front-end frameworks to build interactive, responsive, and visually appealing
+                                    websites and web applications.</p>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+        </div>
+    </section>
+    <section class="team-section py-5" id="team">
+        <div class="container">
+            <h2 class="text-center mb-4 animate__animated animate__fadeIn">Our Team Members</h2>
+            <div class="underline mx-auto mb-5 animate__animated animate__fadeIn animate__delay-0.2s"></div>
+            <div class="row justify-content-center animate__animated animate__fadeIn animate__delay-0.4s">
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/ghayda.jpg" alt="Ghayda' Saify" class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">Ghayda' Saify</h3>
+                        <p class="text-muted">Frontend Developer</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/raghad.jpg" alt="Raghad Sharaf" class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">Raghad Sharaf</h3>
+                        <p class="text-muted">Frontend Developer</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/shorouq.jpeg" alt="Shorouq Amjad" class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">Shorouq Amjad</h3>
+                        <p class="text-muted">Frontend Developer</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/yazeed.jpeg" alt="Yazeed Besher" class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">yazeed besher</h3>
+                        <p class="text-muted">Frontend Developer</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/baraa.jpeg" alt="Baraa Khanfar " class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">Baraa Khanfar</h3>
+                        <p class="text-muted">AI Developer</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/mohab.jpg" alt="Mohab Haidaria" class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">Mohab Haidaria</h3>
+                        <p class="text-muted">AI Developer</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/Rawan.jpeg" alt="Rawan Abureesh" class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">Rawan Abureesh</h3>
+                        <p class="text-muted">Data Analyst</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 team-card-col">
+                    <div class="team-card bg-white rounded shadow-sm p-3">
+                        <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                            <img src="../static/assets/img/team/omar.jpeg" alt="Omar Hamad" class="img-fluid">
+                        </div>
+                        <h3 class="h5 mb-2 font-weight-bold">Omar Hamad</h3>
+                        <p class="text-muted">Data Analyst</p>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+<!--     
+    <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="team-member-card">
+                    <img src="member1.jpg" alt="Member 1">
+                    <h3>Member 1 Name</h3>
+                    <p>Member 1 Title</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="team-member-card">
+                    <img src="member2.jpg" alt="Member 2">
+                    <h3>Member 2 Name</h3>
+                    <p>Member 2 Title</p>
+                </div>
+            </div>
+            </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-  </div>
 
-  <!-- Linking Emoji Mart script for emoji picker -->
-  <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+ -->
 
-  <!-- Linking custom script -->
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- Contact-->
+
+    <section class="Team cotch" id="thanks">
+        <div class="container text-center">
+            <h2 class="mb-4 animate__animated animate__fadeIn">Acknowledgment of Our Coach</h2>
+            <div class="underline mx-auto mb-5 animate__animated animate__fadeIn animate__delay-0.2s"></div>
+            <p class="lead animate__animated animate__fadeIn animate__delay-0.4s">
+                We would like to express our deepest gratitude to our coach for her unwavering dedication, hard work, and continuous support throughout this journey. Her commitment, responsibility, and motivation have been a driving force behind our progress. She has not only guided us with knowledge but also inspired us to push our limits and strive for excellence. We truly appreciate her patience, encouragement, and belief in our abilities. Thank you for being an exceptional mentor and for making this experience so meaningful.
+            </p>
+            <div class="team-card-col center ">
+                <div class=" bg-white rounded shadow-sm p-3">
+                    <div class="profile-picture rounded-circle overflow-hidden mx-auto mb-3">
+                        <img src="../static/assets/img/team/shahd.jpeg" alt="Shahd Kitany" class="img-fluid">
+                    </div>
+                    <h3 class="h5 mb-2 font-weight-bold">Shahd Kitany</h3>
+                    <p class="text-muted">EduRoute mentor</p>
+                </div>
+            </div>
+                <hr>
+                
+        </div>
+    </section>
+
+
+    <section class="connect-section py-5" id="connect">
+        <div class="container text-center">
+            <h2 class="mb-4 animate__animated animate__fadeIn">Let's Get In Touch!</h2>
+            <div class="underline mx-auto mb-5 animate__animated animate__fadeIn animate__delay-0.2s"></div>
+            <p class="lead animate__animated animate__fadeIn animate__delay-0.4s">
+                We are here to help you on your EduRoute. Contact us to learn more or get personalized guidance.
+            </p>
+            <a href="#"
+                class="btn btn-primary btn-lg ripple animate__animated animate__fadeInUp animate__delay-0.6s">Contact
+                Us</a>
+                <hr>
+                
+        </div>
+    </section>
+    <!-- Footer-->
+     
+    <footer class="footer bg-accent text-light">
+        <div class="container footer-content py-5">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 footer-section">
+                    <h3 class="h5 mb-3 font-weight-bold">About EduRoute</h3>
+                    <p>EduRoute is designed to provide students and professionals with a personalized learning path to
+                        guide them through the educational journey. We offer tailored resources, career advice, and
+                        tools to help you reach your learning and career goals efficiently.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-section">
+                    <h3 class="h5 mb-3 font-weight-bold">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#teams">Departments</a></li>
+                        <li><a href="#connect">Connect</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 footer-section text-center">
+                    <h3 class="h5 mb-3 font-weight-bold">Our Sponsors</h3>
+                    <p>We extend our gratitude to our sponsors for their invaluable support.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <img src="../static/assets/img/image.png" alt="Sponsor 1" class="sponsor-logo">
+                        <img src="../static/assets/img/spark2.webp" alt="Sponsor 2" class="sponsor-logo">
+                        <img src="../static/assets/img/Udacity_Logo_2024.png" alt="Sponsor 3" class="sponsor-logo">
+                        <img src="../static/assets/img/Screenshot_2025-02-20_003902-removebg-preview.png" alt="Sponsor 4" class="sponsor-logo">
+                        <img src="../static/assets/img/logo-02-copy-1-1024x391.png" alt="Sponsor 5" class="sponsor-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center py-3 bg-accent">
+            <p class="mb-0">&copy; 2025 EduRoute. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let buttons = document.querySelectorAll('.ripple');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    let rect = this.getBoundingClientRect();
+                    let x = e.clientX - rect.left;
+                    let y = e.clientY - rect.top;
+                    let ripple = document.createElement('span');
+
+                    // Set the size and position of the ripple based on the button size
+                    let size = Math.max(this.offsetWidth, this.offsetHeight);
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = (x - size / 2) + 'px';
+                    ripple.style.top = (y - size / 2) + 'px';
+
+                    // Append the ripple to the button
+                    this.appendChild(ripple);
+
+                    // Remove the ripple after the animation ends
+                    setTimeout(() => ripple.remove(), 600);  // Matches the animation duration
+                });
+            });
+        });
+    </script> -->
+    
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SimpleLightbox plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../static/js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const teamButtons = document.querySelectorAll('.btn-team');
+    const teamMemberCards = document.querySelectorAll('.team-member-card');
+
+    teamButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const team = button.dataset.team;
+
+            // Hide all cards first
+            teamMemberCards.forEach(card => card.classList.remove('show'));
+
+            // Show cards for the selected team
+            const selectedCards = document.querySelectorAll(`.team-member-card.${team}`);
+            selectedCards.forEach(card => card.classList.add('show'));
+        });
+    });
+</script>
 </body>
+
 </html>
