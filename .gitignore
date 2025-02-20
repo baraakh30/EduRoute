@@ -2,5 +2,4 @@
 /outputs
 /unsloth_compiled_cache
 /_unsloth_sentencepiece_temp
-/career-qwen
 app/__pycache__
