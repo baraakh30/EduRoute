@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduRoute</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link href="../static/css/results.css" rel="stylesheet" />
+
+</head>
+<body>
+  <div class="loading-container" id="loadingContainer">
+    <div class="progress-bar">
+      <svg class="circle" width="120" height="120">
+        <circle class="circle-background" cx="60" cy="60" r="54"></circle>
+        <circle class="circle-progress" cx="60" cy="60" r="54"></circle>
+      </svg>
+      <div class="progress-text" id="progressText">0%</div>
+    </div>
+    <p class="loading-message">Loading...</p>
+  </div>
+  <div class="lamp-container" id="lampContainer">
+    <div class="rope"></div>
+    <div class="lamp">
+      <div class="bulb"></div>
+    </div>
+    <p class="click-text">Click!</p>
+  </div>
+<!-- Remove the second card from the container -->
+<div class="container" id="cardsContainer">
+  <div class="card">
+      <div class="card-inner">
+          <div class="card-front">Recommended Job</div>
+          <div class="card-back">Software Engineer</div>
+      </div>
+  </div>
+  <!-- Step cards will be dynamically inserted here -->
+</div>
+  </div>
+  <script type="module" src="../static/js/show_results.js"></script>
+
+  <img id="lampImage" src="../static/images/Ai.jpg" alt="Lamp Image" style="display: none;width: 500px;height: auto;margin: 20px auto;border-radius: 15px; ">
+
+   <footer style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); text-align: center;">
+    <img id="sleepingRobot" src="https://cdn-icons-png.flaticon.com/512/4712/4712025.png" 
+        alt="Sleeping Robot" width="75  ">
+
+</footer>
+
+</body>
+</html>
