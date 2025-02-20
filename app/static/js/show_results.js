@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to calculate the interval duration based on the prompt type
   function getProgressIntervalDuration(promptType) {
       if (promptType == 1) {
+        console.log(promptType)
+
           return 50; // for 6 seconds, we need 60ms interval per progress step
       } else if (promptType == 2) {
-        console.log(promptType)
           return 90; // for 15 seconds, we need 250ms interval per progress step
       }
       return 60; // Default case
