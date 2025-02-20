@@ -22,7 +22,6 @@ load_in_4bit = True  # Use 4bit quantization to reduce memory usage. Can be Fals
 #     load_in_4bit = load_in_4bit,
 # )
 
-
 # Load the model and tokenizer
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name=MODEL_DIR,  # YOUR MODEL YOU USED FOR TRAINING
@@ -31,6 +30,28 @@ model, tokenizer = FastLanguageModel.from_pretrained(
     load_in_4bit=load_in_4bit,
 )
 FastLanguageModel.for_inference(model)  # Enable native 2x faster inference
+
+user_profiles = [
+    {
+        "interests": ["Web Development"],
+        "level": "Beginner",
+        "learning_goal": "Career shift",
+        "preferred_learning_method": "Videos",
+        "previous_knowledge": ["HTML", "CSS"],
+        "thinking_level": "intermediate"
+    },
+    {
+        "interests": ["Data Science"],
+        "level": "Beginner",
+        "learning_goal": "Career shift",
+        "preferred_learning_method": "Books",
+        "previous_knowledge": ["Python"],
+        "thinking_level": "beginner"
+    },
+
+]
+
+
 
 # Alpaca prompt template
 prompt2 = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
@@ -150,6 +171,8 @@ You are an AI chatbot that answers questions and your name is RouteGuide
 ### Response:
 {}"""
 
+
+
 def extract_json_from_text(text):
     # Use regex to find the JSON-like structure, ignoring code block syntax (backticks)
     match = re.search(r'### Response:\s*(\{.*?\})', text.replace('```json', '').replace('```', ''), re.DOTALL)
@@ -184,6 +207,12 @@ def generate_response(user_profile, prompt_type=1):
     response = tokenizer.batch_decode(outputs)
     return extract_json_from_text(response[0])
 
+
+print("Warming up...")
+for i, profile in enumerate(user_profiles):
+    generate_response(profile,1)
+    generate_response(profile,2)
+print("Warming up Finished!")
 
 @app.route('/')
 def home():

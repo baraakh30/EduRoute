@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (promptType == 1) {
         console.log(promptType)
 
-          return 50; // for 6 seconds, we need 60ms interval per progress step
+          return 60; // for 6 seconds, we need 60ms interval per progress step
       } else if (promptType == 2) {
-          return 90; // for 15 seconds, we need 250ms interval per progress step
+          return 105; // for 15 seconds, we need 250ms interval per progress step
       }
       return 60; // Default case
   }
