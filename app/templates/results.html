@@ -10,8 +10,45 @@
   />
   <link href="../static/css/results.css" rel="stylesheet" />
 
+<!--  <style>-->
+<!--    body {-->
+<!--        margin: 0;-->
+<!--        overflow: hidden;-->
+<!--        background: #013220 ; /* Light gray background (adjust as needed) */-->
+<!--    }-->
+
+<!--    .bubble-container {-->
+<!--        position: absolute;-->
+<!--        top: 0;-->
+<!--        left: 0;-->
+<!--        width: 100%;-->
+<!--        height: 100%;-->
+<!--        z-index: -1; /* Place bubbles behind other content */-->
+<!--         /* Allow clicks to pass through bubbles */-->
+<!--    }-->
+
+<!--    .bubble {-->
+<!--        position: absolute;-->
+<!--        background-color: #e6f2ff ;-->
+<!--        border-radius: 50%;-->
+<!--        opacity: 0.6; /* Adjust opacity as needed */-->
+<!--        animation: float 6s linear infinite, drift 4s linear infinite; /* Combine animations */-->
+<!--    }-->
+
+<!--    @keyframes float {-->
+<!--        0% { transform: translateY(100vh); opacity: 0; } /* Start at bottom, fade in */-->
+<!--        25% { opacity: 1; } /* Fully visible */-->
+<!--        100% { transform: translateY(-20vh); opacity: 0; } /* Float to top, fade out */-->
+<!--    }-->
+
+<!--    @keyframes drift {-->
+<!--        0% { margin-left: 0; }-->
+<!--        50% { margin-left: 20%; } /* Move horizontally */-->
+<!--        100% { margin-left: 0; }-->
+<!--    }-->
+<!--</style>-->
 </head>
-<body>
+<body class=" bubble-container">
   <div class="loading-container" id="loadingContainer">
     <div class="progress-bar">
       <svg class="circle" width="120" height="120">
@@ -49,6 +86,26 @@
         alt="Sleeping Robot" width="75  ">
 
 </footer>
+<script>
+  // Bubble creation (moved to the end of the <body> for faster loading of other content)
+  const bubbleContainer = document.querySelector('.bubble-container');
+  const numBubbles = 20; // Adjust number of bubbles
 
+  for (let i = 0; i < numBubbles; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+
+      const size = Math.random() * 50 + 50; // 50px to 100px
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+
+      bubble.style.left = Math.random() * 100 + '%';
+      bubble.style.top = Math.random() * 100 + '%';
+
+      bubble.style.animationDelay = Math.random() * 3 + 's';
+
+      bubbleContainer.appendChild(bubble);
+  }
+</script>
 </body>
 </html>
