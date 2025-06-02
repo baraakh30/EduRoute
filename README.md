@@ -190,32 +190,6 @@ python qwentesting.py
 - **Port**: 5000
 - **Debug Mode**: Enabled in development
 
-## 🤝 Team
-
-### Frontend Developers
-- **Ghayda' Saify** - Frontend Developer
-- **Raghad Sharaf** - Frontend Developer
-- **Shorouq Amjad** - Frontend Developer
-- **Yazeed Besher** - Frontend Developer
-
-### AI Developers
-- **Baraa Khanfar** - AI Developer
-- **Mohab Haidaria** - AI Developer
-
-### Data Analysts
-- **Rawan Abureesh** - Data Analyst
-- **Omar Hamad** - Data Analyst
-
-### Mentor
-- **Shahd Kitany** - EduRoute Mentor
-
-## 🏆 Sponsors
-
-We extend our gratitude to our sponsors for their invaluable support:
-- Spark
-- Udacity
-- Additional industry partners
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
